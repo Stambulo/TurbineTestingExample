@@ -20,7 +20,7 @@ import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.stub
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class TurbineWaitsViewModelTest {
+class MultiFlowViewModelTest {
 
     // 1.
     @Mock
@@ -53,7 +53,7 @@ class TurbineWaitsViewModelTest {
             heavyComputation.stub {
                 onBlocking { doComputation() } doAnswer { expectedString }
             }
-            val sut = ExampleViewModel(heavyComputation)
+            val sut = SingleFlowViewModel(heavyComputation)
 
             // 3.
             sut.vmState.test {
@@ -83,7 +83,7 @@ class TurbineWaitsViewModelTest {
                     onBlocking { doComputation() } doAnswer { expectedString }
                 }
 
-                val sut = StateFlowViewModel(heavyComputation)
+                val sut = MultiFlowViewModel(heavyComputation)
 
                 val firstStateReceiver = sut.vmState.testIn(backgroundScope)
                 val secondStateReceiver = sut.secondVmState.testIn(backgroundScope)
