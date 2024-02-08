@@ -10,7 +10,7 @@ import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 
 @RunWith(JUnit4::class)
-class `1_TurbineViewModelTest` {
+class SingleFlowViewModelTest {
 
     // 1.
     @Mock
@@ -24,7 +24,7 @@ class `1_TurbineViewModelTest` {
     fun `Given the sut is initialized, then it waits for event`() {
 
         // 3.
-        val sut = ExampleViewModel(heavyComputation)
+        val sut = SingleFlowViewModel(heavyComputation)
 
         // 4.
         assertTrue(sut.vmState.value == VmState.Waiting)
